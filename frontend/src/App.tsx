@@ -8,35 +8,40 @@ const App = () => {
     const { isLoggedIn } = useAppContext();
 
     return (
-        <BrowserRouter>
-            <Routes>
-                {isLoggedIn ? (
-                    <>
-                        <Route
-                            path="/home"
-                            element={
-                                <WithNavBar>
-                                    <Home />
-                                </WithNavBar>
-                            }
-                        />
-                        <Route path="*" element={<Navigate to="/home" />} />
-                    </>
-                ) : (
-                    <>
-                        <Route
-                            path="/login"
-                            element={
-                                <WithNavBar>
-                                    <Login />
-                                </WithNavBar>
-                            }
-                        />
-                        <Route path="*" element={<Navigate to="/login" />} />
-                    </>
-                )}
-            </Routes>
-        </BrowserRouter>
+        <>
+            <BrowserRouter>
+                <Routes>
+                    {isLoggedIn ? (
+                        <>
+                            <Route
+                                path="/home"
+                                element={
+                                    <WithNavBar>
+                                        <Home />
+                                    </WithNavBar>
+                                }
+                            />
+                            <Route path="*" element={<Navigate to="/home" />} />
+                        </>
+                    ) : (
+                        <>
+                            <Route
+                                path="/login"
+                                element={
+                                    <WithNavBar>
+                                        <Login />
+                                    </WithNavBar>
+                                }
+                            />
+                            <Route
+                                path="*"
+                                element={<Navigate to="/login" />}
+                            />
+                        </>
+                    )}
+                </Routes>
+            </BrowserRouter>
+        </>
     );
 };
 

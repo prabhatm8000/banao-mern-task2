@@ -1,6 +1,7 @@
 import DarkMask from "../components/DarkMask";
 import NavBar from "../components/NavBar";
 import { useAppContext } from "../hooks/useAppContext";
+import React from "react";
 
 const WithNavBar = ({ children }: { children: React.ReactNode }) => {
     const { isDarkMaskOn } = useAppContext();

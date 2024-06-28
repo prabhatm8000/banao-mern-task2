@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 import type { PostDataType } from "../../../backend/src/types";
 import * as apiClient from "../apiClient";
 import { useAppContext } from "../hooks/useAppContext";
+import React from "react";
 
 export type PostContextType = {
     allPosts: PostDataType[];
