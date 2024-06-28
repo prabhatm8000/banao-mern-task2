@@ -1,15 +1,14 @@
 import { formatDistanceToNow } from "date-fns";
 import { useState } from "react";
 import { BiCommentDetail, BiLike, BiSolidLike } from "react-icons/bi";
+import { CgSpinnerTwo } from "react-icons/cg";
 import { IoPersonCircle } from "react-icons/io5";
 import { SlOptions } from "react-icons/sl";
 import type { PostDataType } from "../../../backend/src/types";
-import { useAppContext } from "../hooks/useAppContext";
-import Carousel from "./Carousel";
-import { usePostContext } from "../hooks/usePostContext";
-import { CgSpinnerTwo } from "react-icons/cg";
-import { useQuery } from "react-query";
 import * as apiClient from "../apiClient";
+import { useAppContext } from "../hooks/useAppContext";
+import { usePostContext } from "../hooks/usePostContext";
+import Carousel from "./Carousel";
 
 const PostCard = ({
     postData,
@@ -25,6 +24,7 @@ const PostCard = ({
     const { currentUser, showToast } = useAppContext();
     const { deletePost, updatePostCountValue } = usePostContext();
 
+    const [isLoadingLike, setIsLoadingLike] = useState<boolean>(false);
     const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
     const handleDeleteBtn = async () => {
@@ -43,28 +43,21 @@ const PostCard = ({
         setIsOptionsOpen(false);
     };
 
-    const { refetch: likeUnlike, isFetching: likeUnlikeIsFetching } = useQuery(
-        "likePost",
-        () => apiClient.likeUnlikePost(postData._id),
-        {
-            enabled: false,
-            refetchOnWindowFocus: false,
-            onSuccess: (data) => {
-                if (data.isLiked) {
-                    updatePostCountValue(postData._id, 1, "likes");
-                } else {
-                    updatePostCountValue(postData._id, -1, "likes");
-                }
-            },
-            onError: (error: any) => {
-                console.log(error);
-                showToast({
-                    message: error.message,
-                    type: "error",
-                });
-            },
+    const handleLikeBtn = async () => {
+        setIsLoadingLike(true);
+        try {
+            const response = await apiClient.likeUnlikePost(postData._id);
+            if (response.isLiked) {
+                updatePostCountValue(postData._id, 1, "likes");
+            } else {
+                updatePostCountValue(postData._id, -1, "likes");
+            }
+        } catch (error: any) {
+            console.error(error);
+            showToast({ message: error.message, type: "error" });
         }
-    );
+        setIsLoadingLike(false);
+    };
 
     // useEffect(() => {
     //     const handleEscapeKeyEvent = (e: KeyboardEvent) => {
@@ -117,10 +110,10 @@ const PostCard = ({
             <div className="p-4 border-t border-t-white/15 w-full flex justify-around items-center">
                 <button
                     className="flex items-center gap-1"
-                    onClick={() => likeUnlike()}
-                    disabled={likeUnlikeIsFetching}
+                    onClick={() => handleLikeBtn()}
+                    disabled={isLoadingLike}
                 >
-                    {likeUnlikeIsFetching ? (
+                    {isLoadingLike ? (
                         <CgSpinnerTwo className="animate-spin" size={24} />
                     ) : (
                         <>

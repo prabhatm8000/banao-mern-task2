@@ -440,7 +440,7 @@ export const likeUnlikePost = async (req: Request, res: Response) => {
             {
                 $project: {
                     isLiked: {
-                        $in: ["$userId", "$likes"],
+                        $in: [req.userId, "$likes"],
                     },
                 },
             },

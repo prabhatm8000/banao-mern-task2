@@ -73,7 +73,7 @@ const Home = () => {
 
     return (
         <>
-            <div className="backdrop-blur-sm bg-white/10 sticky top-[72px] z-[100]">
+            <div className="backdrop-blur-sm bg-white/10 sticky top-[68px] sm:top-[72px] z-[100]">
                 <ul className="flex justify-start items-center gap-4 container mx-auto px-4 w-full border-b border-white/20 ">
                     <li
                         onClick={() => setTab("all")}

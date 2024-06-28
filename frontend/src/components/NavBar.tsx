@@ -11,20 +11,20 @@ const NavBar = () => {
             </a>
 
             {currentUser && (
-                <ul className="flex items-center gap-4">
+                <ul className="flex items-center gap-3">
                     <li className="flex items-center gap-1">
-                        <IoPersonCircle size={30} />
+                        <IoPersonCircle size={30} className="hidden sm:block" />
                         <span>{currentUser.username}</span>
                     </li>
                     <li>
                         <button
                             onClick={logout}
-                            className="px-4 py-2 bg-red-400 text-white rounded-md focus:outline-none flex justify-center items-center gap-1"
+                            className="px-2 py-2 sm:px-4 sm:py-2 bg-red-400 text-white rounded-full sm:rounded-md focus:outline-none flex justify-center items-center gap-1"
                         >
-                            <span>
+                            <span className="text-xl">
                                 <RiLogoutBoxLine />
                             </span>
-                            <span>Logout</span>
+                            <span className="hidden sm:block">Logout</span>
                         </button>
                     </li>
                 </ul>

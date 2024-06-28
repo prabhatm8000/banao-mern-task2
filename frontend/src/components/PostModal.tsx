@@ -180,7 +180,7 @@ const PostModal = ({
                             onSubmit={onSubmitComment}
                             autoComplete="off"
                         >
-                            <div className="flex flex-col">
+                            <div className="flex flex-col w-full">
                                 <input
                                     type="text"
                                     placeholder="Write a comment..."
