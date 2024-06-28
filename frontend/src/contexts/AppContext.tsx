@@ -132,7 +132,6 @@ export const AppContextProvider = ({
                     type: "success",
                 });
                 window.location.href = "/";
-                window.location.reload();
             }
         } catch (error: any) {
             setToast({
