@@ -200,7 +200,10 @@ const Login = () => {
                     className="bg-blue-400 px-6 py-2 w-fit rounded-full disabled:bg-gray-400 hover:bg-blue-500 hover:px-8 transition-all duration-300 delay-75 focus:outline-none"
                 >
                     {loadingAuthResponse ? (
-                        <CgSpinnerTwo className="animate-spin" size={24} />
+                        <div className="flex items-center gap-2">
+                            <CgSpinnerTwo className="animate-spin" size={24} />
+                            <span>{"Authenticating..."}</span>
+                        </div>
                     ) : (
                         <>
                             {formType === "login"
