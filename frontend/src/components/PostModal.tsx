@@ -191,7 +191,7 @@ const PostModal = ({
                                 />
                                 {errors.comment && (
                                     <span className="text-red-500 text-xs">
-                                        *{errors.comment.message.toString()}
+                                        *{errors.comment.message?.toString()}
                                     </span>
                                 )}
                             </div>

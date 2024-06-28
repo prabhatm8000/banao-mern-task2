@@ -45,7 +45,7 @@ const AddEditPostModal = ({
         close();
         reset();
         setImageDataUrls([]);
-        setPostDataToUndefined();
+        if (setPostDataToUndefined) setPostDataToUndefined();
     };
 
     const { mutate: addPost, isLoading: uploading } = useMutation(
