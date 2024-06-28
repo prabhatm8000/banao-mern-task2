@@ -131,6 +131,8 @@ export const AppContextProvider = ({
                     message: "Logout successful",
                     type: "success",
                 });
+                window.location.href = "/";
+                window.location.reload();
             }
         } catch (error: any) {
             setToast({
