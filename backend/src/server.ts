@@ -25,18 +25,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use("/api", routes);
 
-// Serve frontend
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join("../frontend/dist")));
 
-    app.get("*", (req, res) =>
-        res.sendFile(path.resolve("../frontend", "dist", "index.html"))
-    );
-} else {
-    app.get("/", (req, res) => {
-        res.send("API is running...");
-    });
-}
+app.get("/", (req, res) => {
+    res.send("API is running...");
+});
 
 httpServer.listen(port, () => {
     mongoose.connect(process.env.MONGODB_URI as string);
